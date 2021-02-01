@@ -96,6 +96,30 @@ int main() {
 
     }
 
+    // ---------- Loop Statements ---------- //
+
+    int count = 1;
+
+    while (count <= 5) { // While Loop Statement
+
+        printf(" %d ..", count); // Print current count.
+
+        count++; // Add to the total count.
+
+    }
+
+    printf("\n");
+
+    const int countTo = 10;
+
+    for (int i = 1; i <= 10; i++) { // For Loop Statement
+
+        printf("%d - ", i);
+
+        // No need to increment here, since it is done in the parameters above.
+
+    }
+
     return 0; // main() functions in C need to return an exit code. Exit code 0 means a successful process.
 
 }
