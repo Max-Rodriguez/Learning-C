@@ -126,6 +126,7 @@ int main() {
 
     struct Student {
 
+        int id;
         char name[40]; // Max 40 characters
         char major[20]; // Max 20 Characters
         int age;
@@ -133,17 +134,33 @@ int main() {
 
     };
 
+    void printStudent(struct Student s) {
+
+        printf("\n| ---------------- Student Information ---------------- |\n");
+
+        printf("ID: %i | Name: %s | Age: %i | Major: %s | GPA: %g \n\n", s.id, s.name, s.age, s.major, s.gpa);
+
+    }
+
     struct Student student1; // Create Data Structure from 'Student' struct.
 
+    student1.id = 1;
     student1.age = 18;
     student1.gpa = 2.9;
     strcpy(student1.major, "Computer Science");
     strcpy(student1.name, "John Doe");
 
-    printf("---------------- Student Information ----------------\n");
+    printStudent(student1); // Pass struct formed to function.
 
-    printf("Name: %s | Age: %i | Major: %s | GPA: %g \n", 
-        student1.name, student1.age, student1.major, student1.gpa);
+    struct Student student2;
+
+    student2.id = 2;
+    student2.age = 17;
+    student2.gpa = 3.7;
+    strcpy(student2.major, "Engineering");
+    strcpy(student2.name, "Foo Bar");
+
+    printStudent(student2);
 
     return 0; // main() functions in C need to return an exit code. Exit code 0 means a successful process.
 
