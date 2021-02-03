@@ -120,6 +120,31 @@ int main() {
 
     }
 
+    printf("\n");
+
+    // ---------- Structs [Data Structure, not a class] ---------- //
+
+    struct Student {
+
+        char name[40]; // Max 40 characters
+        char major[20]; // Max 20 Characters
+        int age;
+        float gpa;
+
+    };
+
+    struct Student student1; // Create Data Structure from 'Student' struct.
+
+    student1.age = 18;
+    student1.gpa = 2.9;
+    strcpy(student1.major, "Computer Science");
+    strcpy(student1.name, "John Doe");
+
+    printf("---------------- Student Information ----------------\n");
+
+    printf("Name: %s | Age: %i | Major: %s | GPA: %g \n", 
+        student1.name, student1.age, student1.major, student1.gpa);
+
     return 0; // main() functions in C need to return an exit code. Exit code 0 means a successful process.
 
 }
