@@ -162,6 +162,30 @@ int main() {
 
     printStudent(student2);
 
+    // ---------- 2-Dimensional Arrays ---------- //
+
+    int nums[3][5] = {  // First [] does not require a fixed size, but the second [] does.
+
+        {4, 1, 3, 2, 5},
+        {6, 10, 7, 9, 8},     // Basically an array of arrays, a 2 dimensional array.
+        {14, 11, 15, 13, 12}
+
+    };
+
+    for (int i = 0; i < 3; i++) { // Iterate through arrays
+
+        printf("{ ");
+
+        for (int x = 0; x < 5; x++) { // Iterate through items of each array
+
+            printf("%i, ", nums[i][x]);
+
+        }
+
+        printf("} \n"); // New line after every array listed
+
+    }
+
     return 0; // main() functions in C need to return an exit code. Exit code 0 means a successful process.
 
 }
