@@ -167,7 +167,7 @@ int main() {
     int nums[3][5] = {  // First [] does not require a fixed size, but the second [] does.
 
         {4, 1, 3, 2, 5},
-        {6, 10, 7, 9, 8},     // Basically an array of arrays, a 2 dimensional array.
+        {6, 10, 7, 9, 8},     // Basically an array of arrays
         {14, 11, 15, 13, 12}
 
     };
@@ -182,9 +182,55 @@ int main() {
 
         }
 
-        printf("} \n"); // New line after every array listed
+        printf("} \n\n"); // New line after every array listed
 
     }
+
+    // ---------- Memory Address Pointers ---------- //
+
+    char words[] = "Hello World!";
+
+    printf("Mem Addr: %p \n", &words); // %p stands for pointer. Will print the memory address of the variable.
+
+    // Memory Addresses go by hexadecimals (0 - F) (16 Symbols)
+
+    float dec = 3.5;
+                            // Use same data type for pointers.
+    float * pDec = &dec;
+
+    // ---------- Dereferencing Pointers ---------- //
+
+    printf("%p \n", pDec); // Will output pointer value.
+    printf("%g \n", * pDec); // Will output data of whats inside the memory address pointed by the pointer.
+    printf("%g \n", * &dec); // Same output, referencing and dereferencing pointer of 'dec'.
+
+    // ---------- Using The File System ---------- //
+
+    FILE * filepointer = fopen("writing.txt", "w"); // Creates 'employees.txt' file in memory.
+
+    // Will place file to relative directory from this process.
+
+    fprintf(filepointer, "This text was written by the program."); // 'print' to file (first argument)
+
+    fclose(filepointer); // Closes 'employees.txt' file pointer from memory.
+
+
+    FILE * fpointer = fopen("appending.txt", "a"); // Appends data to 'appending.txt'
+
+    fprintf(fpointer, "This text is appended every time the program executes.\n");
+
+    fclose(fpointer);
+
+    // --- Reading Files --- //
+
+    char line[255];
+
+    FILE * fRead = fopen("read.txt", "r"); // Read Only Mode
+
+    fgets(line, 255, fRead);
+    printf("%s", line);
+
+    fclose(fRead); // Clear from memory
 
     return 0; // main() functions in C need to return an exit code. Exit code 0 means a successful process.
 
