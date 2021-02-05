@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int main() {
 
@@ -16,14 +17,14 @@ int main() {
 
     printf("Value of int 'a': %i \n", a);
 
-    int* p;     // Declare pointer 'p'
+    int *p;     // Declare pointer 'p'
     p = &a;     // (&) Operator gets Memory Address value of variable specified.
 
     printf("Mem Addr of 'a': 0x%p \n", p); // Prints Memory Address Pointer Value
 
     printf("Size of Int 'a': %i bytes\n", sizeof(a)); // Proof that integer variable takes 4 bytes of memory.
 
-    int* p1 = p + 1;
+    int *p1 = p + 1;
 
     printf("Mem Addr (+1 Int): 0x%p \n", p1); // Prints memory address + 4 bytes (Since an Integer takes 4 bytes.)
 
@@ -63,7 +64,7 @@ int main() {
 
     char character = 'D';
 
-    char* pChar = &character; // Note: Same data type, * operator to declare pointer.
+    char *pChar = &character; // Note: Same data type, * operator to declare pointer.
 
     printf("Value of char variable: %c \n", character);
 
@@ -71,7 +72,7 @@ int main() {
 
     printf("Size of Char Variable: %i Byte \n", sizeof(character));
 
-    char* pChar1 = pChar + 1;
+    char *pChar1 = pChar + 1;
 
     printf("Mem Addr (+1 Char): 0x%p \n", pChar1); // +1 Char Space, 1 Address Ahead (1 Byte)
 
@@ -83,12 +84,12 @@ int main() {
     printf("==== Type Casting Pointers ==== \n\n");
 
     int integer = 1025; // Binary: 00000000 00000000 00000100 00000001 [4 Bytes for Int]
-    int* pI = &integer;
+    int *pI = &integer;
 
     printf("Value of Integer var: %i \n", integer);
     printf("Mem Addr in Int Pointer: 0x%p \n\n", pI);
 
-    char* pC = (char*)pI; // Type cast integer pointer as character pointer.
+    char *pC = (char*)pI; // Type cast integer pointer as character pointer.
 
     /*
 
@@ -139,17 +140,43 @@ int main() {
 
     char x = 'E'; // char 'x' value is 'E'
 
-    char* u = &x; // Pointer to char 'x'
+    char *u = &x; // Pointer to char 'x'
 
-    char** q = &u; // ** = Pointer of Pointer
+    char **q = &u; // ** = Pointer of Pointer
 
-    char*** r = &q; // *** = Pointer to Pointer to Pointer
+    char ***r = &q; // *** = Pointer to Pointer to Pointer
 
     printf("'r' pointer value: 0x%p \n", r);
     printf("'r' points to 'q': 0x%p \n", *r);
     printf("'q' points to 'u': 0x%p \n", *q);
     printf("'u' points to char 'x': %c \n\n", *u);
 
-    return 0;
+    // ----- Dynamically Allocating Memory with <stdlib.h> ----- //
+
+    printf("==== Dynamically Allocating Memory ====\n\n");
+
+    float *pF = (float*) malloc(sizeof(float)); // Allocate 4 Bytes, pass address to pointer.
+
+    // If unable to allocate memory, will return NULL which assigns pointer as NULL.
+
+    if (pF == NULL) { // Check for NULL Pointer
+
+        printf("[ERROR]: Null Pointer; Failed to allocate memory. \n");
+
+        return EXIT_FAILURE; // Return Exit Code 1
+
+    }
+
+    *pF = 3.65; // Set Value to Memory Address allocated
+
+    printf("Allocated Memory At: 0x%p \n", pF);
+    
+    printf("Value of Memory Address: %g \n\n", *pF);
+
+    free(pF); // Unallocate Memory Space at Pointer Address
+
+    printf("Freed Pointer Memory Address Value: %s \n\n", *pF);
+
+    return EXIT_SUCCESS;
 
 }
