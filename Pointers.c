@@ -19,17 +19,17 @@ int main() {
     int* p;     // Declare pointer 'p'
     p = &a;     // (&) Operator gets Memory Address value of variable specified.
 
-    printf("Mem Addr of 'a': %p \n", p); // Prints Memory Address Pointer Value
+    printf("Mem Addr of 'a': 0x%p \n", p); // Prints Memory Address Pointer Value
 
     printf("Size of Int 'a': %i bytes\n", sizeof(a)); // Proof that integer variable takes 4 bytes of memory.
 
     int* p1 = p + 1;
 
-    printf("Mem Addr (+1 Int): %p \n", p1); // Prints memory address + 4 bytes (Since an Integer takes 4 bytes.)
+    printf("Mem Addr (+1 Int): 0x%p \n", p1); // Prints memory address + 4 bytes (Since an Integer takes 4 bytes.)
 
 
-    printf("\n^ ^ 4 Bytes ahead of original address.\n");
-    printf("----- %p => %p [4 Hexadecimals Ahead]\n", p, p1);
+    printf("\n^ ^ 4 Bytes ahead of original address. \n");
+    printf("----- 0x%p => 0x%p [4 Hexadecimals Ahead] \n", p, p1);
 
 
     // Accessing memory ahead of pointer address
@@ -67,16 +67,16 @@ int main() {
 
     printf("Value of char variable: %c \n", character);
 
-    printf("Mem Addr of 'char': %p \n", pChar);
+    printf("Mem Addr of 'char': 0x%p \n", pChar);
 
     printf("Size of Char Variable: %i Byte \n", sizeof(character));
 
     char* pChar1 = pChar + 1;
 
-    printf("Mem Addr (+1 Char): %p \n", pChar1); // +1 Char Space, 1 Address Ahead (1 Byte)
+    printf("Mem Addr (+1 Char): 0x%p \n", pChar1); // +1 Char Space, 1 Address Ahead (1 Byte)
 
 
-    printf("----- %p => %p [1 Hexadecimal Ahead]\n\n", pChar, pChar1);
+    printf("----- 0x%p => 0x%p [1 Hexadecimal Ahead]\n\n", pChar, pChar1);
 
     // Type Casting Pointers
 
@@ -85,8 +85,8 @@ int main() {
     int integer = 1025; // Binary: 00000000 00000000 00000100 00000001 [4 Bytes for Int]
     int* pI = &integer;
 
-    printf("Value of Integer var: %i\n", integer);
-    printf("Mem Addr in Int Pointer: %p\n\n", pI);
+    printf("Value of Integer var: %i \n", integer);
+    printf("Mem Addr in Int Pointer: 0x%p \n\n", pI);
 
     char* pC = (char*)pI; // Type cast integer pointer as character pointer.
 
@@ -108,10 +108,10 @@ int main() {
     */
 
     printf("Size of a character is %i byte.\n", sizeof(char));
-    printf("Mem Addr in Char Pointer: %p \nDereferenced Pointer Value: %i \n\n", pC, *pC);
+    printf("Mem Addr in Char Pointer: 0x%p \nDereferenced Pointer Value: %i \n\n", pC, *pC);
 
-    printf("Char Pointer Mem Addr (+1 Char): %p\n", pC + 1);
-    printf("Next Mem Address (+1 Char) Value: %i\n\n", *(pC + 1));
+    printf("Char Pointer Mem Addr (+1 Char): 0x%p \n", pC + 1);
+    printf("Next Mem Address (+1 Char) Value: %i \n\n", *(pC + 1));
 
     /*
 
@@ -145,9 +145,9 @@ int main() {
 
     char*** r = &q; // *** = Pointer to Pointer to Pointer
 
-    printf("'r' pointer value: %p \n", r);
-    printf("'r' points to 'q': %p \n", *r);
-    printf("'q' points to 'u': %p \n", *q);
+    printf("'r' pointer value: 0x%p \n", r);
+    printf("'r' points to 'q': 0x%p \n", *r);
+    printf("'q' points to 'u': 0x%p \n", *q);
     printf("'u' points to char 'x': %c \n\n", *u);
 
     return 0;
