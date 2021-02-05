@@ -196,17 +196,17 @@ int main() {
 
     float dec = 3.5;
                             // Use same data type for pointers.
-    float * pDec = &dec;
+    float* pDec = &dec;
 
     // ---------- Dereferencing Pointers ---------- //
 
     printf("%p \n", pDec); // Will output pointer value.
-    printf("%g \n", * pDec); // Will output data of whats inside the memory address pointed by the pointer.
-    printf("%g \n", * &dec); // Same output, referencing and dereferencing pointer of 'dec'.
+    printf("%g \n", *pDec); // Will output data of whats inside the memory address pointed by the pointer.
+    printf("%g \n", *&dec); // Same output, referencing and dereferencing pointer of 'dec'.
 
     // ---------- Using The File System ---------- //
 
-    FILE * filepointer = fopen("writing.txt", "w"); // Creates 'employees.txt' file in memory.
+    FILE* filepointer = fopen("writing.txt", "w"); // Creates 'employees.txt' file in memory.
 
     // Will place file to relative directory from this process.
 
@@ -215,7 +215,7 @@ int main() {
     fclose(filepointer); // Closes 'employees.txt' file pointer from memory.
 
 
-    FILE * fpointer = fopen("appending.txt", "a"); // Appends data to 'appending.txt'
+    FILE* fpointer = fopen("appending.txt", "a"); // Appends data to 'appending.txt'
 
     fprintf(fpointer, "This text is appended every time the program executes.\n");
 
@@ -225,7 +225,7 @@ int main() {
 
     char line[255];
 
-    FILE * fRead = fopen("read.txt", "r"); // Read Only Mode
+    FILE* fRead = fopen("read.txt", "r"); // Read Only Mode
 
     fgets(line, 255, fRead);
     printf("%s", line);
