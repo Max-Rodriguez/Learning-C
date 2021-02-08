@@ -248,6 +248,17 @@ int main() {
 
     pVoid(); // Execute Function with Pointer
 
+    // ----- Callbacks [i dont even get the point of this?] ----- //
+
+    void A() { printf("'A' callback function executed!\n\n"); }
+
+    void B( void (*pointer)() ) { 
+
+        pointer(); // Callback Function, accesses pointer.
+
+    }
+
+    B(A); // A is the callback function.
 
     return EXIT_SUCCESS;
 
