@@ -151,6 +151,40 @@ int main() {
     printf("'q' points to 'u': 0x%p \n", *q);
     printf("'u' points to char 'x': %c \n\n", *u);
 
+    // ----- Pointers as Function Arguments ----- //
+
+    printf("==== Pointers as Function Arguments ==== \n\n");
+
+    void Increment(int i) {
+
+        i = i + 1;
+
+        // Will only affect variable in scope, not original variable.
+        // Variable in this scope has a different memory address, so it won't work.
+
+    }
+
+    int i = 10;
+    printf("Original value of 'I' = %i \n\n", i);
+
+    Increment(i);
+
+    printf("'I' after Increment() = %i \n", i);
+
+    void pIncrement(int *i) {
+
+        *i = *i + 1;
+
+        // Will increment at correct address.
+
+    }
+
+    int *pi = &i; // Get pointer for 'i' address.
+
+    pIncrement(pi);
+
+    printf("'I' after pIncrement() = %i \n\n", i);
+
     // ----- Dynamically Allocating Memory with <stdlib.h> ----- //
 
     printf("==== Dynamically Allocating Memory ====\n\n");
@@ -176,6 +210,44 @@ int main() {
     free(pF); // Unallocate Memory Space at Pointer Address
 
     printf("Freed Pointer Memory Address Value: %s \n\n", *pF);
+
+    // ----- Function Pointers ----- //
+
+    printf("==== Function Pointers ==== \n\n");
+
+    /*
+    
+        Pointers can point to functions, since they also have memory addresses.
+
+        Function pointers must be declared as same data type as return data type of function.
+
+    */
+
+    int add(int a, int b) {
+
+        return a + b;   // Function
+
+    }
+
+    // <datatype> (<pointer_name>)(<argument_datatypes>) = <address>
+    int (*pAdd)(int, int) = &add;
+
+    int sum = pAdd(25, 10); // Executing function pointer with arguments passed
+
+    printf("Function Pointer Returned Sum: %i \n\n", sum);
+
+    // ----- Void Function Pointers
+
+    void voidFunction() {
+
+        printf("This was executed from a function pointer.\n\n");
+
+    }
+
+    void (*pVoid)() = &voidFunction; // No arguments needed for void function.
+
+    pVoid(); // Execute Function with Pointer
+
 
     return EXIT_SUCCESS;
 
