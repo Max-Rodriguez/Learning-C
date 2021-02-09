@@ -1,127 +1,113 @@
 /*
+    ===== MemoryLeaks.c =====
 
-    M E M O R Y   L E A K S  -  E X A M P L E
+    A memory leak is when a process allocates memory space, but
+    does not free the memory after it is done using it.
 
-    |=====|--- Simple Betting Game ---|=====|
+    This can happen in loops and the way memory is allocated
+    in the program, and in what scopes memory is allocated.
 
-    Jack Queen King - Program Shuffles Card Positions
-
-    Player has to guess the position of the queen.
-
-    If player wins, he takes home (3x) the bet.
-
-    If he loses, he loses cash by bet amount set.
-
-    Cash variable initializes at $100.
-
+    For example, if you need a temporary variable to be allocated
+    in memory for a quick task, you would want that variable
+    to be alloacted in a certain scope, to avoid memory leaks since
+    once the program exits a scope all memory allocated in that
+    scope is unallocated and freed.
 */
 
-// TODO: Fix scanning input string for bet.
-// TODO: Why doesnt vscode have todo
+// TODO: Find out why windows made this stupidly harder.
+// TODO: Also find out why windows ONLY had C++ examples of this.
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 
-#define MAX_BET_SIZE 64
+#ifdef _WIN32
 
-// Global Variable
-int cash = 100;
+    #include <windows.h>
+    #include <psapi.h>
+    #define CLEAR "cls"
 
-void playGame(int bet) {
+    void memUsage() {
 
-    char card[3] = {'J', 'Q', 'K'};
+        // Form structure for Process' Memory Data
+        typedef struct _PROCESS_MEMORY_COUNTERS {
 
-    srand(time(NULL));
+            DWORD  cb;
+            DWORD  PageFaultCount;
+            SIZE_T PeakWorkingSetSize;
+            SIZE_T WorkingSetSize; // Current Memory Allocated
+            SIZE_T QuotaPeakPagedPoolUsage;
+            SIZE_T QuotaPagedPoolUsage;
+            SIZE_T QuotaPeakNonPagedPoolUsage;
+            SIZE_T QuotaNonPagedPoolUsage;
+            SIZE_T PagefileUsage;
+            SIZE_T PeakPagefileUsage;
 
-    for (int i = 0; i < 5; i++) {
+        } PROCESS_MEMORY_COUNTERS;
 
-        int x = rand() % 3;
-        int y = rand() % 3;
+        // Create structure
+        struct _PROCESS_MEMORY_COUNTERS usageData;
 
-        int temporary = card[x];
-        card[x] = card[y];       // Swaps Chars at positions x and y.
-        card[y] = temporary; 
-
-
-    }
-
-    printf(" What's Your Guess on the Queen's Position? [1, 2, or 3] : ");
-
-    int guess;
-    scanf("%i", &guess);
-
-    if (guess > 3) {
-
-        printf("\n Invalid Guess, the only card positions are 1 to 3! \n");
-
-        return; // End Round, Money not affected.
+        printf("Current Memory Usage: %d KB\n\n", 
+            (usageData.WorkingSetSize / 1024)); // Print Usage
 
     }
 
-    if (card[guess - 1] == 'Q') {
+#endif
 
-        cash += bet * 3; // Triple bet amount
+#ifdef __unix__
 
-        printf("\n You Won! || Results = %c, %c, %c || Total Cash : $%i\n", 
-            card[0], card[1], card[2], cash);
+    #include <sys/resource.h>
+    #define CLEAR "clear"
 
-    } else {
+    void memUsage() {
+        
+        struct rusage usageData; // Get Mem Usage
+        getrusage(RUSAGE_SELF, &usageData);
 
-        cash -= bet; // Take away cash by bet placed.
-
-        printf("\n You Lost! || Results = %c, %c, %c || Total Cash : $%i\n",
-            card[0], card[1], card[2], cash);
+        printf("Current Memory Usage: %ld KB\n\n", 
+            usageData.ru_maxrss); // Print Usage
 
     }
 
-}
+#endif
 
-// Main
 int main() {
 
-    int bet; // Initialize bet variable.
+    system(CLEAR); // Console Clear
+    printf("======== Memory Leaks ========\n\n");
 
-    printf("\n=============================\n\n");
+    memUsage(); // Current Mem Allocated
 
-    while (cash > 0) {
+    // Memory Allocated v v
+    int addition(int a, int b) {
 
-        bet = 0; // Reset Bet Variable
+        // Memory Allocated
+        int sum = a + b;
 
-        int getBet() {
+        // Making Memory Allocated Noticable
+        long long noticeableMemory1;
+        long long noticeableMemory2;
+        long long noticeableMemory3;
+        long long noticeableMemory4;
+        long long noticeableMemory5;
 
-            char input[MAX_BET_SIZE];
+        memUsage(); // Current Mem Allocated
 
-            printf(" What's your bet? $: ");
-            scanf("%s", &input);
+        return sum; // Exits scope
 
-            int in = atoi(input); // Filter Characters
-            bet = in; // Set Bet
-
-            return 1; // Success
-
-        }
-
-        int inputFlag = getBet(); // Get Player Input
-
-        // Deny invalid bet amount
-        if (inputFlag == 0 || bet == 0 || bet > cash) {
-            
-            printf("\n That is an invalid bet amount, please try again.\n\n");
-
-            return EXIT_SUCCESS; // Exit
-
-        }
-
-        printf("\n=============================\n\n");
-
-        playGame(bet); // Begin Round
-
-        printf("\n=============================\n\n");
+        /*
+            All memory allocated in this scope
+            is unallocated at exit, freeing
+            these temporary variables like
+            the parameters and 'sum' variable.
+        */
 
     }
 
-    printf("Game Over, you reached $%i cash.\n\n", cash);
+    printf("Addition Task Returned: %i \n\n", 
+        addition(5, 5)); // Returns, no memory leak.
+
+    memUsage(); // Current Mem Allocated
 
     return EXIT_SUCCESS;
 
