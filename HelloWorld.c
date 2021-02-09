@@ -2,6 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+/* All #'s are preprocessor directives.
+Basically run before main compilation.
+Do stuff like applying headers and
+Basic Defined Variables */
+
+#define CONSTANT 10
+
 // Void Function (Does not return data)
 void function() {
 
