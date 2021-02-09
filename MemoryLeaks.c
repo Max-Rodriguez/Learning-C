@@ -19,6 +19,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include <time.h>
 
 #ifdef _WIN32
 
@@ -28,26 +30,34 @@
 
     void memUsage() {
 
-        // Form structure for Process' Memory Data
-        typedef struct _PROCESS_MEMORY_COUNTERS {
+        /* I just CANT make this work.
+           Microsoft's documentation on psapi.h
+           actually sucks, prints incredibly
+           unrealistic data, just use the task
+           manager to see the memory leak on Win32.
+        */
+
+        // Redefine Struct
+        typedef struct {
 
             DWORD  cb;
             DWORD  PageFaultCount;
             SIZE_T PeakWorkingSetSize;
-            SIZE_T WorkingSetSize; // Current Memory Allocated
+            SIZE_T WorkingSetSize;
             SIZE_T QuotaPeakPagedPoolUsage;
             SIZE_T QuotaPagedPoolUsage;
             SIZE_T QuotaPeakNonPagedPoolUsage;
             SIZE_T QuotaNonPagedPoolUsage;
             SIZE_T PagefileUsage;
             SIZE_T PeakPagefileUsage;
+            SIZE_T PrivateUsage;
 
-        } PROCESS_MEMORY_COUNTERS;
+        } PROCESS_MEMORY_COUNTERS_EX;
 
-        // Create structure
-        struct _PROCESS_MEMORY_COUNTERS usageData;
+        // Initialize Struct
+        PROCESS_MEMORY_COUNTERS_EX usageData;
 
-        printf("Current Memory Usage: %d KB\n\n", 
+        printf("Current Memory Usage: %zu KB [Broken on Win32! Use task manager.]\n\n", 
             (usageData.WorkingSetSize / 1024)); // Print Usage
 
     }
@@ -64,50 +74,62 @@
         struct rusage usageData; // Get Mem Usage
         getrusage(RUSAGE_SELF, &usageData);
 
-        printf("Current Memory Usage: %ld KB\n\n", 
+        printf("Current Memory Usage: %ld KB \n\n", 
             usageData.ru_maxrss); // Print Usage
 
     }
 
 #endif
 
+void delay(int ms) {
+  
+    // Store Current Time
+    clock_t start_time = clock();
+  
+    // Loop until difference requirement
+    while (clock() < start_time + ms);
+
+}
+
 int main() {
 
     system(CLEAR); // Console Clear
-    printf("======== Memory Leaks ========\n\n");
 
-    memUsage(); // Current Mem Allocated
-
-    // Memory Allocated v v
     int addition(int a, int b) {
 
-        // Memory Allocated
         int sum = a + b;
 
-        // Making Memory Allocated Noticable
-        long long noticeableMemory1;
-        long long noticeableMemory2;
-        long long noticeableMemory3;
-        long long noticeableMemory4;
-        long long noticeableMemory5;
+        // Dynamically Allocating 102 Bytes (.1 KB)
+        char *allocation = (char*) malloc(102);
 
-        memUsage(); // Current Mem Allocated
-
-        return sum; // Exits scope
+        return sum; // Exit scope without freeing memory
 
         /*
-            All memory allocated in this scope
-            is unallocated at exit, freeing
-            these temporary variables like
-            the parameters and 'sum' variable.
+            Dynamically Alloacted Memory, a.k.a
+            allocation methods from standard library, 
+            will not get freed at the exit of a scope.
+
+            This is a simple example of a memory leak.
         */
 
     }
 
-    printf("Addition Task Returned: %i \n\n", 
-        addition(5, 5)); // Returns, no memory leak.
+    while (true) {
 
-    memUsage(); // Current Mem Allocated
+        // Pseudo Random Generator seed
+        srand(time(NULL));
+
+        int a = rand() % 50;
+        int b = rand() % 50;
+
+        printf("Addition Task Returned: %i \n\n", 
+            addition(a, b)); // Returns, memory leaked.
+
+        memUsage(); // Print Current Memory Allocated
+
+        delay(1000);
+
+    }
 
     return EXIT_SUCCESS;
 
