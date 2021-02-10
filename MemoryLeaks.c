@@ -9,17 +9,13 @@
 
     For example, if you need a temporary variable to be allocated
     in memory for a quick task, you would want that variable
-    to be alloacted in a certain scope, to avoid memory leaks since
+    to be allocated in a certain scope, to avoid memory leaks since
     once the program exits a scope all memory allocated in that
     scope is unallocated and freed.
 */
 
-// TODO: Find out why windows made this stupidly harder.
-// TODO: Also find out why windows ONLY had C++ examples of this.
-
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <time.h>
 
 #ifdef _WIN32
@@ -37,7 +33,7 @@
            manager to see the memory leak on Win32.
         */
 
-        // Redefine Struct
+        // Redefine Structure
         typedef struct {
 
             DWORD  cb;
@@ -54,10 +50,10 @@
 
         } PROCESS_MEMORY_COUNTERS_EX;
 
-        // Initialize Struct
+        // Initialize Structure
         PROCESS_MEMORY_COUNTERS_EX usageData;
 
-        printf("Current Memory Usage: %zu KB [Broken on Win32! Use task manager.]\n\n", 
+        printf("Current Memory Usage: %zu KB [Broken on Win32! Use task manager.]\n\n",
             (usageData.WorkingSetSize / 1024)); // Print Usage
 
     }
@@ -70,11 +66,11 @@
     #define CLEAR "clear"
 
     void memUsage() {
-        
-        struct rusage usageData; // Get Mem Usage
+
+        struct rusage usageData; // Get Memory Usage
         getrusage(RUSAGE_SELF, &usageData);
 
-        printf("Current Memory Usage: %ld KB \n\n", 
+        printf("Current Memory Usage: %ld KB \n\n",
             usageData.ru_maxrss); // Print Usage
 
     }
@@ -82,10 +78,10 @@
 #endif
 
 void delay(int ms) {
-  
+
     // Store Current Time
     clock_t start_time = clock();
-  
+
     // Loop until difference requirement
     while (clock() < start_time + ms);
 
@@ -105,8 +101,8 @@ int main() {
         return sum; // Exit scope without freeing memory
 
         /*
-            Dynamically Alloacted Memory, a.k.a
-            allocation methods from standard library, 
+            Dynamically Allocated Memory, a.k.a
+            allocation methods from standard library,
             will not get freed at the exit of a scope.
 
             This is a simple example of a memory leak.
@@ -114,7 +110,7 @@ int main() {
 
     }
 
-    while (true) {
+    while (1) {
 
         // Pseudo Random Generator seed
         srand(time(NULL));
@@ -122,7 +118,7 @@ int main() {
         int a = rand() % 50;
         int b = rand() % 50;
 
-        printf("Addition Task Returned: %i \n\n", 
+        printf("Addition Task Returned: %i \n\n",
             addition(a, b)); // Returns, memory leaked.
 
         memUsage(); // Print Current Memory Allocated
