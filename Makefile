@@ -1,12 +1,27 @@
-# =====================================
+# ======================================
 #
-#    Build All Projects - Makefile
+#     Build Source Code - Makefile
 #
-#     This is my first makefile.
+#      My first makefile with GCC.
 #
-# =====================================
+# ======================================
 
-CC = gcc
+# ----- Build Variables ----- #
 
-betting_game: BettingGame.exe
-     $(CC) BettingGame.c -o BettingGame
+COMPILER = gcc
+TARGET = MemoryLeaks
+
+# ----- Build & Compile Target ----- #
+
+all: $(TARGET) clean
+
+$(TARGET): $(TARGET).o
+	$(COMPILER) $(TARGET).o -o $(TARGET)
+
+$(TARGET).o: $(TARGET).c
+	$(COMPILER) -c $(TARGET).c
+
+# ----- Clean Build Files ----- #
+
+clean:
+	del *.o
