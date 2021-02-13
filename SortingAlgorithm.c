@@ -77,23 +77,23 @@ int main() {
 
 	for (int i = 0; i < length; i = i + 1) {
 
+		int min_pos = i;
+
 		for (int x = i + 1; x < length; x = x + 1) {
 
-			if (array[i] > array[x]) {
-
-				int swap = array[i];
-				array[i] = array[x];
-				array[x] = swap;
-
-				swaps = swaps + 1;
-				accesses = accesses + 4;
-
-			}
+			if (array[x] < array[min_pos]) min_pos = x;
 
 			accesses = accesses + 2;
 			comparisons = comparisons + 1;
 
 		}
+
+		int swap = array[i];
+		array[i] = array[min_pos];
+		array[min_pos] = swap;
+
+		accesses = accesses + 4;
+		swaps = swaps + 1;
 
 	}
 
