@@ -2,14 +2,12 @@
 #
 #     Build Source Code - Makefile
 #
-#      My first makefile with GCC.
-#
 # ======================================
 
 # ----- Build Variables ----- #
 
 COMPILER = gcc
-TARGET = MemoryLeaks
+TARGET = SortingAlgorithm
 
 # ----- Build & Compile Target ----- #
 
