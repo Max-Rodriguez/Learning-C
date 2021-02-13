@@ -70,8 +70,8 @@ int main() {
 	*/
 
 	int swaps = 0;
-	long comparisons = 0;
-	long accesses = 0;
+	int comparisons = 0;
+	int accesses = 0;
 
 	clock_t start = clock(); // Get Start Timestamp
 
@@ -114,8 +114,8 @@ int main() {
 	// ------- Sorting Algorithm Stats ------- //
 
 	printf(
-		"  Comparisons: %ld  |  Swaps: %i  |  Array Accesses: %ld  |  Algorithm Time: %.4fs\n\n", 
-		comparisons, swaps, accesses, (float)(duration / 1000)
+		"  Comparisons: %i  |  Swaps: %i  |  Array Accesses: %i  |  Algorithm Time: %i ms\n\n", 
+		comparisons, swaps, accesses, (int)(duration)
 	);
 
 	return EXIT_SUCCESS;
