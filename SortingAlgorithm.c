@@ -114,7 +114,7 @@ int main() {
 	// ------- Sorting Algorithm Stats ------- //
 
 	printf(
-		"  Comparisons: %i  |  Swaps: %i  |  Array Accesses: %i  |  Algorithm Time: %.2fs\n\n", 
+		"  Comparisons: %i  |  Swaps: %i  |  Array Accesses: %i  |  Algorithm Time: %.4fs\n\n", 
 		comparisons, swaps, accesses, (float)(duration / 1000)
 	);
 
