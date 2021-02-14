@@ -2,22 +2,24 @@
 #
 #     Build Source Code - Makefile
 #
+#      Written for Windows Systems
+#
 # ======================================
 
 # ----- Build Variables ----- #
 
-COMPILER = gcc
+CC = gcc
 TARGET = SortingAlgorithm
 
-# ----- Build & Compile Target ----- #
+# ----- Build and Compile ----- #
 
 all: $(TARGET) clean
 
 $(TARGET): $(TARGET).o
-	$(COMPILER) $(TARGET).o -o $(TARGET)
+	$(CC) $(TARGET).o -o $(TARGET)
 
 $(TARGET).o: $(TARGET).c
-	$(COMPILER) -c $(TARGET).c
+	$(CC) -c $(TARGET).c
 
 # ----- Clean Build Files ----- #
 
