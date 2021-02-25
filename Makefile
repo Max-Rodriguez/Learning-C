@@ -6,7 +6,7 @@
 #
 # ======================================
 
-# ----- Build Variables ----- #
+# ----- Build Arguments ----- #
 
 CC = gcc
 TARGET = SortingAlgorithm
