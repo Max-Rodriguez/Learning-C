@@ -3,6 +3,8 @@
 #       Build - Makefile
 #   Written For Windows Systems
 #
+#   Run 'make all' to compile.
+#
 # ===============================
 
 CC = gcc
