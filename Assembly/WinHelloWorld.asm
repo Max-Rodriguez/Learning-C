@@ -1,4 +1,5 @@
-; ===   Hello World - x86 Assembly in Win32   ===
+;
+;     Hello World  -  x86 Assembly in Win32
 ;
 ; My first Assembly Program for x86 architecture.
 ; Using Microsoft MASM assembler for compilation.
@@ -9,6 +10,8 @@
 ;	Date: 		Feb-26-2021
 ;
 ; ===============================================
+
+; ========== Initialization ===========
 
 .386
 .model flat, stdcall
@@ -21,6 +24,8 @@ include \masm32\include\masm32.inc
 includelib \masm32\lib\kernel32.lib
 includelib \masm32\lib\masm32.lib
 
+; =========== Main Assembly ===========
+
 .data	; Program Data
 
 	message db "Hello World!", 0
@@ -29,7 +34,7 @@ includelib \masm32\lib\masm32.lib
 
 	main:	; Main Block
 
-		invoke StdOut, addr message		; Invoke Standard Out Syscall
+		invoke StdOut, addr message		; Invoke Standard Out Syscall with 'message'
 		invoke ExitProcess, 0			; Invoke Exit Syscall, exit code 0
 
 	end main
