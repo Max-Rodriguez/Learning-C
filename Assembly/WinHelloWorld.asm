@@ -11,6 +11,32 @@
 ;
 ; ===============================================
 
+
+;       ------ Low Level Basics ------
+;
+;  An Executable process uses 4 main resources.
+;
+;  Heap  |  Registers  |  Stack  |  Instructions
+;
+; Heap - Manually Allocated Memory by Process
+; This is dynamically allocated memory, usually larger.
+;
+; Registers - Pointers / Variables allocated, 8 bytes.
+; These are stored in the CPU which is faster than-
+; reaching for random access memory at every access.
+;
+; (In x86 architecture, there are 6 general purpose
+; registers, eax, ebx, ecx, edx, esi, edi, and 3
+; reserved registers, ebp, esp, eip.)
+;
+; Stack - The 'stack' or conveyor belt serving the
+; instructions in order from memory.
+;
+; Instructions - The very building block of an
+; executable program. These instructions are stored
+; in the process stack at execution.
+
+
 ; ========== Initialization ===========
 
 .386
