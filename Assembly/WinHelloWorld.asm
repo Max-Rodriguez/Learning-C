@@ -1,8 +1,8 @@
 ;
 ;     Hello World  -  x86 Assembly in Win32
 ;
-; My first Assembly Program for x86 architecture.
-; Using Microsoft MASM assembler for compilation.
+; My first Assembly Program for x86 architecture
+; using Microsoft MASM assembler for compilation.
 ;
 ; ===============================================
 ;
@@ -18,24 +18,23 @@
 ;
 ;  Heap  |  Registers  |  Stack  |  Instructions
 ;
-; Heap - Manually Allocated Memory by Process
+; 	Heap - Manually Allocated Memory by Process
 ; This is dynamically allocated memory, usually larger.
 ;
-; Registers - Pointers / Variables allocated, 8 bytes.
+; 	Registers - Pointers / Variables allocated, 8 bytes.
 ; These are stored in the CPU which is faster than-
 ; reaching for random access memory at every access.
 ;
-; (In x86 architecture, there are 6 general purpose
+; 	(In x86 architecture, there are 6 general purpose
 ; registers, eax, ebx, ecx, edx, esi, edi, and 3
 ; reserved registers, ebp, esp, eip.)
 ;
-; Stack - The 'stack' or conveyor belt serving the
+; 	Stack - The 'stack' or conveyor belt serving the
 ; instructions in order from memory.
 ;
-; Instructions - The very building block of an
+; 	Instructions - The very building block of an
 ; executable program. These instructions are stored
-; in the process stack at execution.
-
+; in the process stack at execution time.
 
 ; ========== Initialization ===========
 
@@ -60,7 +59,7 @@ includelib \masm32\lib\masm32.lib
 
 	main:	; Main Block
 
-		invoke StdOut, addr message		; Invoke Standard Out Syscall with 'message'
-		invoke ExitProcess, 0			; Invoke Exit Syscall, exit code 0
+		invoke		StdOut, addr message		; Invoke Standard Out Syscall with 'message'
+		invoke 		ExitProcess, 0				; Invoke Exit Syscall, exit code 0
 
 	end main
