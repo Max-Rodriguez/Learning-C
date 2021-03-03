@@ -6,6 +6,9 @@
 #
 # ===============================
 
+ASMBLR = \masm32\bin\ml
+LINKER = \masm32\bin\Link
+
 TARGET = WinHelloWorld
 
 # ----- Run Assembler ----- #
@@ -13,10 +16,10 @@ TARGET = WinHelloWorld
 all: assembler linker clean
 
 assembler:
-	\masm32\bin\ml /c /Zd /coff $(TARGET).asm
+	$(ASMBLR) /c /Zd /coff $(TARGET).asm
 
 linker:
-	\masm32\bin\Link /SUBSYSTEM:CONSOLE $(TARGET).obj
+	$(LINKER) /SUBSYSTEM:CONSOLE $(TARGET).obj
 
 # ----- Clean Object Files ----- #
 
