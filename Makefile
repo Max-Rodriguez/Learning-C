@@ -2,7 +2,7 @@
 #
 #     Build Source Code - Makefile
 #
-#      Written for Windows Systems
+#   Written for Windows/Linux Systems
 #
 # ======================================
 
@@ -13,7 +13,8 @@ TARGET = SortingAlgorithm
 
 # ----- Build and Compile ----- #
 
-all: $(TARGET) clean
+windows: $(TARGET) clean-win
+linux: $(TARGET) clean-bash
 
 $(TARGET): $(TARGET).o
 	$(CC) $(TARGET).o -o $(TARGET)
@@ -23,5 +24,8 @@ $(TARGET).o: $(TARGET).c
 
 # ----- Clean Build Files ----- #
 
-clean:
+clean-win:
 	del *.o
+
+clean-bash:
+	rm *.os
