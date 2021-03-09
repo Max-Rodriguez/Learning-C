@@ -28,4 +28,4 @@ clean-win:
 	del *.o
 
 clean-bash:
-	rm *.os
+	rm *.o
