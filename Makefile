@@ -4,25 +4,36 @@
 #
 #   Written for Windows/Linux Systems
 #
+# --------------------------------------
+#
+#  Run 'make windows' for Windows OS.
+#
+#  Run 'make linux' for Linux Systems.
+#
 # ======================================
 
 # ----- Build Arguments ----- #
 
 CC = gcc
-TARGET = SortingAlgorithm
+BIN = Executables
+
+TARGET = BettingGame
 
 # ----- Build and Compile ----- #
 
-windows: $(TARGET) clean-win
-linux: $(TARGET) clean-bash
+windows: winbuild clean-win
+linux: linuxbuild clean-bash
 
-$(TARGET): $(TARGET).o
-	$(CC) $(TARGET).o -o $(TARGET)
+winbuild: $(TARGET).o
+	$(CC) $(TARGET).o -o $(BIN)/$(TARGET).exe
+
+linuxbuild: $(TARGET)
+	$(CC) $(TARGET).o -o $(BIN)/$(TARGET)-x64.linux
 
 $(TARGET).o: $(TARGET).c
 	$(CC) -c $(TARGET).c
 
-# ----- Clean Build Files ----- #
+# ----- Clean Object Files ----- #
 
 clean-win:
 	del *.o
